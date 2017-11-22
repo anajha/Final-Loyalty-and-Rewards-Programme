@@ -1,0 +1,91 @@
+body, html{
+        height: 100%;
+ 	background-repeat: no-repeat;
+ 	background-color: #d3d3d3;
+ 	font-family: 'Oxygen', sans-serif;
+}
+
+.main{
+ 	margin-top: 1px;
+        margin-bottom: 10px;
+}
+
+h1.title { 
+	font-size: 30px;
+	font-family: 'Times New Roman', cursive; 
+	font-weight: 400px; 
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+ 	background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+.main-center{
+ 	margin-top: 5px;
+ 	margin: 0 auto;
+ 	max-width: 400px;
+        padding: 30px 30px;
+
+}
+nav {
+    float: left;
+    max-width: 190px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+table{border-spacing: 15px 15px;
+}
+td{padding: 20px;}
+nav ul a {
+    text-decoration: none;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}

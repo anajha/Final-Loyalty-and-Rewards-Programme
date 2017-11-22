@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+    <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"></link>
+
+		<!-- Website CSS style -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css"></link>
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+		
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'></link>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'></link>
+
+		<title>Universal Rewards</title>
+	<script src="/js/angular.min.js"></script>
+		<script type="text/javascript">
+		var app = angular.module('myapp',[]);
+		app.controller('ExampleController', function($scope,$http,$window) {
+			
+	 	$scope.submit = function (merchid,merchname,mrate) {
+	 		if ($window.confirm("Do you want to continue?"))
+			{		
+	 		$http({
+	 	          method: 'POST',
+	 	          url: '/demo/addmerchant',
+	 	          params: {merchid:merchid,merchname:merchname,mrate:mrate},
+	 	          headers: 'Accept:application/json'
+	 	        }).then(function(response) {
+	 	        	console.log(response.data);
+	 	        	$window.alert(response.data.message);
+	 	        });
+	 	}    
+	 	}
+	        $scope.showvalue = function (merchid) {
+	 		$http({
+	 	          method: 'POST',
+	 	          url: '/demo/merchview',
+	 	          params: {merchid:merchid},
+	 	          headers: 'Accept:application/json'
+	 	        }).then(function(response) {
+	 	        	console.log(response.data);
+	 	        	$scope.merchname=response.data.mername;
+	 	        	$scope.mrate=response.data.merrate;
+	 	        });
+	         
+	 	}
+});
+		</script>
+			<style>
+						
+			span{
+				color:red;
+				}
+				 ul{ 
+ 					list-style-type:none; 
+ 					margin:0; 
+ 					padding:0; 
+ 					overflow:hidden; 
+ 					background-color:lightblue; 
+ 					} 
+			li{
+				float:left;
+				}
+			li a{ 
+ 					display:block; 
+ 					color:white; 
+ 					text-align:left; 
+				 	padding:10px 10px; 
+ 					font-size:10px; 
+ 	} 
+			.active{
+ 					background-color:#4CAF50;
+				} 	
+			li a:hover{
+				background-color: grey;
+				}
+				.Mainfooter
+			{
+				background-color:#113154;
+				bottom:0;
+				position:relative;
+				width:100%;
+			}
+			.Mainfooter .row .footerDiv a
+			{
+				padding:0 10px;
+				color:black;
+				text-decoration:none;
+				color:white;
+			}
+			.Mainfooter .row .footerDiv p .desclaimer
+			{
+				color:white;
+				padding: 0 10px;
+				
+			}
+					
+		</style>	
+	</head>
+	<body ng-app="myapp" style="height:115%; background-color:#ff9900" ng-controller="ExampleController">
+<header>
+<h1 style="background-color:grey">Merchant Addition Screen</h1>
+</header>
+		<ul>
+					<li><a href="addpan.html">Add New Member</a></li>
+					<li><a class="active" href="addmerchant.html" target="_self">Add/Update Merchant</a></li>
+					<li><a href="transactionview.html">Perform Transaction</a></li>
+					<li><a href="transferview.html">Perform Transfer</a></li>
+					<li><a href="pointsview.html">View Points</a></li>
+					<li><a href="statsview.html">Statistics Corner</a></li>
+		</ul>
+
+<section>
+<div class="modal-body row">
+   <div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title"><strong>Maintain Merchant Details</strong></h1>
+	               	</div>
+	            </div> 
+				<div class="main-login main-center" style="background-color:yellow">
+					<form class="form-horizontal" name="myform" novalidation="novalidation" method="post">
+						
+						<div class="form-group">
+							<label for="pan1" class="cols-sm-2 control-label">Merchant ID</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="merchid" id="merchid" ng-model="merchid" placeholder="Enter the merchant id" ng-change="showvalue(merchid)" required="required" minlength="8" maxlength="8" ng-pattern="/^[0-9]*$/"></input>
+								</div>
+								    <span ng-show="myform.merchid.$error.required">*Mandatory field</span>  
+									<span ng-show="myform.merchid.$error.minlength">&nbsp;&nbsp;*Merchant ID should be 8 digits</span>  
+									
+								</div>
+						</div>
+							<div class="form-group">
+							<label for="pan2" class="cols-sm-2 control-label">Merchant name</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="merchname" id="merchname" ng-model="merchname" placeholder="Enter merchant's name" required="required" ng-pattern="/^[0-9]*[A-Za-z]+[-_]*[0-9]*$/"></input>
+								</div>
+								    <span ng-show="myform.merchname.$error.required">*Mandatory field</span>
+								    <span ng-show="myform.merchname.$error.pattern">*Please enter a valid merchant name</span>   	
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="points" class="cols-sm-2 control-label">Loyalty and Rewards Scale</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="number" class="form-control" name="mrate" id="mrate"  ng-model="mrate" placeholder="Enter the loyalty and rewards scale for the merchant" ng-Min="1" ng-Max="9" required="required"></input>
+								</div>
+								 <span ng-show="myform.mrate.$error.required">*Mandatory field</span>  
+								<span ng-show="myform.mrate.$error.min">&nbsp;&nbsp;*The entered value should be greater than 0</span>
+								<span ng-show="myform.mrate.$error.max">&nbsp;&nbsp;*The entered value should be less than 10</span>
+							</div>
+						</div>					                    
+                         <div class="form-group ">
+							<input type="submit" id="submit" value="Submit" ng-disabled="myform.$invalid" ng-click="submit(merchid,merchname,mrate)" class="btn btn-primary btn-lg btn-block login-button"></input>
+						 <center><a href="/images/Merchant Addition.png">Design</a></center>
+						</div>
+						
+					
+					</form>
+			</div>
+		</div> 
+         </div> 
+         </div>
+          
+</section>
+              
+		  <footer class="Mainfooter">
+			<div class="row">
+				<div class="col-md-12 footerDiv">
+				<p>
+					<a href=" ">FAQ</a>
+					<a href=" ">Contact Us</a>
+					<a href=" ">Terms and Conditions</a>
+					<a href=" ">Privacy</a>
+					<!--<img src="../images/" alt="Discover_image" />-->
+				</p>
+				<p class="disclaimer">@2017 Discover Bank</p>
+				</div>
+				
+			</div>
+		</footer>
+	</body>
+</html>

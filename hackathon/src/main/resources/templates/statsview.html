@@ -1,0 +1,727 @@
+
+<!DOCTYPE html> 
+ <html lang="en" ng-app="myapp"> 
+ <head>  
+ <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+ <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/> 
+  
+ <!-- Website CSS style --> 
+ <link rel="stylesheet" type="text/css" href="/css/main.css"/> 
+  
+ <!-- Website Font style --> 
+ <link rel="stylesheet" href="/css/bootstrap.min.css"/> 
+  
+ <!-- Google Fonts --> 
+ <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/> 
+ <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/> 
+  
+ <title>Universal Rewards New Member Addition</title> 
+ <script src="/js/angular.min.js"></script> 
+<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type='text/javascript'>
+$(function(){
+   $('.peaklink').click(function(){
+      $('.month').hide(1000);
+      $('.monthresult').hide(1000);
+      $('.resp').hide(1000);
+      $('.unsuccessfulresult').hide(1000);
+      $('.cardlogresult').hide(1000);
+      $('.merchlog').hide(1000);
+      $('.cardlog').hide(1000);
+      $('.merchlogresult').hide(1000);
+      $('.peak').show(1000);
+	return false;
+      
+   });
+   $('.monthlink').click(function(){
+		
+	      $('.peak').hide(1000);
+	      $('.resp').hide(1000);
+	      $('.monthresult').hide(1000);
+	      $('.cardlogresult').hide(1000);
+	      $('.merchlogresult').hide(1000);
+	      $('.merchlog').hide(1000);
+	      $('.cardlog').hide(1000);
+	      $('.unsuccessfulresult').hide(1000);
+	      $('.month').show(1000);
+	    
+		return false;
+	      
+	   });
+   $('.monthresultlink').click(function(){
+	   	  $('.month').hide(1000);
+	      $('.monthresult').show(1000);
+		return false;
+	      
+	   });
+   $('.resplink').click(function(){
+		
+	      $('.peak').hide(1000);
+	      $('.month').hide(1000);
+	      $('.cardlogresult').hide(1000);
+	      $('.monthresult').hide(1000);
+	      $('.merchlogresult').hide(1000);
+	      $('.unsuccessfulresult').hide(1000);
+	      $('.merchlog').hide(1000);
+	      $('.cardlog').hide(1000);
+	      $('.resp').show(1000);
+		return false;
+	      
+	   });
+   $('.unsuccessfulresultlink').click(function(){
+	   	  $('.unsuccessful').hide(1000);
+	      $('.unsuccessfulresult').show(1000);
+		return false;
+	      
+	   });
+   $('.unsuccessfullink').click(function(){
+		
+	      $('.peak').hide(1000);
+	      $('.month').hide(1000);
+	      $('.resp').hide(1000);
+	      $('.cardlogresult').hide(1000);
+	      $('.merchlogresult').hide(1000);
+	      $('.unsuccessfulresult').hide(1000);
+	      $('.merchlog').hide(1000);
+	      $('.cardlog').hide(1000);
+	      $('.unsuccessful').show(1000);
+	     
+		return false;
+	      
+	   });
+   $('.merchlogresultlink').click(function(){
+	   	  $('.merchlog').hide(1000);
+	      $('.merchlogresult').show(1000);
+		return false;
+	      
+	   });
+	$('.merchloglink').click(function(){
+		
+	      $('.peak').hide(1000);
+	      $('.month').hide(1000);
+	      $('.resp').hide(1000);
+	      $('.cardlogresult').hide(1000);
+	      $('.merchlogresult').hide(1000);
+	      $('.unsuccessfulresult').hide(1000);
+	      $('.unsuccessful').hide(1000);
+	      $('.cardlog').hide(1000);
+	      $('.merchlog').show(1000);
+	     
+		return false;
+	      
+	   });
+	  $('.cardlogresultlink').click(function(){
+	   	  $('.cardlog').hide(1000);
+	      $('.cardlogresult').show(1000);
+		return false;
+	      
+	   });
+	$('.cardloglink').click(function(){
+		
+	      $('.peak').hide(1000);
+	      $('.month').hide(1000);
+	      $('.resp').hide(1000);
+	      $('.cardlogresult').hide(1000);
+	      $('.merchlogresult').hide(1000);
+	      $('.unsuccessfulresult').hide(1000);
+	      $('.unsuccessful').hide(1000);
+	      $('.merchlog').hide(1000);
+	      $('.cardlog').show(1000);
+		return false;
+	      
+	   });
+});
+var app = angular.module('myapp',[]);
+app.controller('ExampleController', function($scope,$http,$window) {	
+	
+	$scope.submit1 = function (merchid) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getpeak',
+	          params: {merchid:merchid},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$window.alert(response.data.message);
+	        });
+	}  
+	}
+	
+
+	$scope.submit2 = function (pan) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getmostvalue',
+	          params: {pan:pan},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$window.alert(response.data.message);
+	        });
+	}  
+	}
+	
+	
+	$scope.submit3 = function (month) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getcardlist',
+	          params: {month:month},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$scope.panh=response.data.message;
+	        	$window.alert(response.data.message1);
+	        });
+	}  
+	}
+	
+	$scope.submit4 = function (panx) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getunsuccessfullist',
+	          params: {panx:panx},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$scope.panp=response.data.message;
+	        	$window.alert(response.data.message1);
+	        });
+	}  
+	}
+	
+	$scope.submit5 = function (merchidx) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getmerchloglist',
+	          params: {merchidx:merchidx},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$scope.merchx=response.data.message;
+	        	$window.alert(response.data.message1);
+	        });
+	}  
+	}
+	
+
+	$scope.submit6 = function (panidx) {
+		if ($window.confirm("Do you want to continue?"))
+	{		
+		$http({
+	          method: 'POST',
+	          url: '/demo/getcardloglist',
+	          params: {panidx:panidx},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$scope.pandx=response.data.message;
+	        	$window.alert(response.data.message1);
+	        });
+	}  
+	}
+	$scope.showmerchdata = function (merchid) {		
+		$http({
+	          method: 'POST',
+	          url: '/demo/showmerchdata',
+	          params: {merchid:merchid},
+	          headers: 'Accept:application/json'
+	        }).then(function(response) {
+	        	console.log(response.data);
+	        	$window.alert(response.data.message);
+	        });
+	}  
+});
+</script>
+
+ <style> 
+ body {
+		height: 150%;
+}
+ span{ 
+ color:red; 
+     } 
+ ul{ 
+ list-style-type:none; 
+ margin:0; 
+ padding:0; 
+ overflow:hidden; 
+ background-color:lightblue; 
+ 	} 
+ li{ 
+ float:left; 
+ 	} 
+ li a{ 
+ display:block; 
+ color:white; 
+ text-align:left; 
+ padding:10px 10px; 
+ font-size:10px; 
+ 	} 
+
+.active{
+ background-color:#4CAF50;
+} 
+ .Mainfooter 
+ 	{ 
+ background-color:#113154; 
+ position:fixed;
+ bottom:0; 
+ width:100%; 
+ 	} 
+ .Mainfooter .row .footerDiv a 
+ 	{ 
+ padding:0 10px; 
+ color:black; 
+ text-decoration:none; 
+ color:white; 
+ 	} 
+ .Mainfooter .row .footerDiv p .desclaimer 
+ 	{ 
+ color:white; 
+ padding: 0 10px; 
+   	} 
+
+.container {
+ position:relative;
+ width:100%;
+}
+.image{
+display:block;
+width:120px%;
+height:120px;
+}
+.overlay{
+position:absolute;
+bottom:100%;
+left:0;
+right:0;
+background-color:#008CBA;
+overflow:hidden;
+width:100%;
+height:0;
+transition: .5s ease;
+}
+.container:hover .overlay{
+bottom:0;
+height:100%;
+}
+.text{
+white-space:wrap;
+color:white;
+font-size:12px;
+position:absolute;
+overflow:hidden;
+top:50%;
+left:50%;
+transform: translate(-50%, -50%);
+-ms-transform: translate(-50%,-50%);
+}
+
+
+.peak {
+display:none;
+}
+
+.resp {
+display:none;
+}
+.merchlog {
+display:none;
+}
+.merchlogresult {
+display:none;
+}
+.cardlog {
+display:none;
+}
+.cardlogresult {
+display:none;
+}
+.month {
+display:none;
+}
+.unsuccessful {
+display:none;
+}
+.unsuccessfulresult {
+display:none;
+}
+.monthresult {
+display:none;
+overflow-y:auto;
+}
+
+ </style>  
+ </head> 
+<body ng-app="myapp" style="background-color:#ff9900" ng-controller="ExampleController" >  
+<div id="container">
+<div id="header">
+ <header>
+<h1 style="background-color:grey">View Statistics</h1>
+</header>
+		<ul>
+					<li><a href="addpan.html">Add New Member</a></li>
+					<li><a href="addmerchant.html">Add/Update Merchant</a></li>
+					<li><a href="transactionview.html">Perform Transaction</a></li>
+					<li><a href="transferview.html">Perform Transfer</a></li>
+					<li><a href="pointsview.html">View Points</a></li>
+					<li><a class="active" href="statsview.html"  target="_self">Statistics Corner</a></li>
+		</ul>
+</div>
+<div id="body">
+ <div class="panel-heading">
+ <div class="panel-title text-center">
+ <h1 class="title"><strong>Check all the statistics for merchants and customers</strong></h1>
+ </div>
+ </div> 
+  <center><a href="/images/Spark.png">Design</a></center>
+<div class="myclassname"> 
+<ul>
+<li><a href="#" class="peaklink">
+
+<div class="container">
+<Img src="/images/Peak.png" class="image"/> 
+<div class="overlay">
+<div class="text">What's the peak hour for transactions at a particular merchant ? </div>
+</div>
+</div>
+
+</a></li>
+
+<li><a href="#"  class="monthlink">
+
+<div class="container">
+<Img src="/images/Response.jpg" class="image"/> 
+<div class="overlay">
+<div class="text">Customer Response - Those accruing more than 100$ at a merchant but spending none, at same merchant for a month </div>
+</div>
+</div>
+
+</a></li> 
+
+<li><a href="#"  class="resplink">
+
+<div class="container">
+<Img src="/images/TopMonth.jpg" class="image"/> 
+<div class="overlay">
+<div class="text">Month of securing most value in the wallet for a customer </div>
+</div>
+</div>
+
+</a></li> 
+
+<li><a href="#"  class="unsuccessfullink">
+
+<div class="container">
+<Img src="/images/TFail.png" class="image"/> 
+<div class="overlay">
+<div class="text">How many times, points transfer was unsuccessful for a customer ?</div>
+</div>
+</div>
+
+</a></li> 
+
+<li><a href="#"  class="merchloglink">
+
+<div class="container">
+<Img src="/images/Merchant.jpg" class="image"/> 
+<div class="overlay">
+<div class="text">Merchant Log </div>
+</div>
+</div>
+
+</a></li> 
+
+<li><a href="#"  class="cardloglink">
+
+<div class="container">
+<Img src="/images/Cardholder.jpg" class="image"/> 
+<div class="overlay">
+<div class="text">Cardholder Log </div>
+</div>
+</div>
+
+</a></li> 
+
+</ul> 
+</div>
+
+<div class="peak">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform1" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+ 				<label for="merchid" class="cols-sm-2 control-label">Merchant ID</label>
+ 					<div class="cols-sm-10">
+ 						<div class="input-group">
+ 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+ 							<input type="text" class="form-control" name="merchid" id="merchid" ng-model="merchid" ng-change="showmerchdata(merchid)" placeholder="Enter the merchant id" required="required" minlength="8" maxlength="8" ng-pattern="/^[0-9]*$/"></input>
+ 						</div>
+							<span ng-show="myform1.merchid.$error.required">*Mandatory field</span>  
+							<span ng-show="myform1.merchid.$error.minlength">&nbsp;&nbsp;*Merchant ID should be 8 digits</span>  
+					</div>				
+			</div>	
+			<div class="form-group ">
+				<input type="submit" id="submit1" value="Submit" ng-disabled="myform1.$invalid" ng-click="submit1(merchid)" class="btn btn-primary btn-lg btn-block login-button"></input>
+			</div>						
+ 		</form> 
+ 	</div> 
+ </section> 
+</div>
+
+
+<div class="resp">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform2" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+								<label for="ypan" class="cols-sm-2 control-label">Card Number</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+										<input type="text" class="form-control" name="pan" id="pan" ng-model="pan" placeholder="Enter your card number" required="required" minlength="16" maxlength="16" ng-pattern="/^[0-9]*$/"></input>
+									</div>
+								    <span ng-show="myform2.pan.$error.required">*Mandatory field</span>  
+									<span ng-show="myform2.pan.$error.minlength">&nbsp;&nbsp;*Card number should be 16 digits</span>  
+									<span ng-show="myform2.pan.$error.pattern">&nbsp;&nbsp;*Card number should be numeric</span>  	
+								</div>
+							</div>
+							<div class="form-group ">
+								<input type="submit" id="submit2" ng-disabled="myform2.$invalid" ng-click="submit2(pan)" value="Submit" class="btn btn-primary btn-lg btn-block login-button"></input>
+							</div>			
+ 		</form> 
+ 	</div> 
+ </section> 
+</div>
+
+<div class="month">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform3" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+								<label for="month" class="cols-sm-2 control-label">Month Name</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+										<select name="month" id="month" ng-model="month" required="required">
+  											<option ng-selected="selected" disabled="disabled">Please Select a month</option>
+  											<option value="January">January</option>
+  											<option value="February">February</option>
+  											<option value="March">March</option>
+ 											<option value="April">April</option>
+ 											<option value="May">May</option>
+  											<option value="June">June</option>
+  											<option value="July">July</option>
+ 											<option value="August">August</option>
+ 											<option value="September">September</option>
+  											<option value="October">October</option>
+  											<option value="November">November</option>
+ 											<option value="December">December</option>
+										</select>
+									</div>
+								    <span ng-show="myform3.month.$error.required">*Mandatory field</span>  
+								</div>
+							</div>
+							<div class="form-group ">
+							<div class="monthresultlink">
+								<input type="submit" id="submit3" ng-disabled="myform3.$invalid" ng-click="submit3(month)" value="Submit" class="btn btn-primary btn-lg btn-block login-button"></input>
+							</div>
+							</div>			
+ 		</form> 
+ 	</div> 
+ </section> 
+</div>
+<div class="monthresult">
+<table class="table table-bordered" style="border:3px dashed black;">
+<thead>
+
+<tr style="border:3px dashed black;">
+	<th style="border:3px dashed black;"><center>CARD NUMBER</center></th>
+	<th style="border:3px dashed black;"><center>MERCHANT ID</center></th>
+	<th style="border:3px dashed black;"><center>VALUE ACCUMULATED</center></th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="cardholder in panh">
+                <td align="center" style=" border:3px dashed black;">{{cardholder.values[2]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{cardholder.values[3]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{cardholder.values[0]}}</td>
+</tr>
+</tbody>
+</table>
+</div> 
+
+<div class="unsuccessful">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform4" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+								<label for="ypan" class="cols-sm-2 control-label">Card Number</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+										<input type="text" class="form-control" name="panx" id="panx" ng-model="panx" placeholder="Enter your card number" required="required" minlength="16" maxlength="16" ng-pattern="/^[0-9]*$/"></input>
+									</div>
+								    <span ng-show="myform4.panx.$error.required">*Mandatory field</span>  
+									<span ng-show="myform4.panx.$error.minlength">&nbsp;&nbsp;*Card number should be 16 digits</span>  
+									<span ng-show="myform4.panx.$error.pattern">&nbsp;&nbsp;*Card number should be numeric</span>  	
+								</div>
+							</div>
+							<div class="form-group ">
+							<div class="unsuccessfulresultlink">
+								<input type="submit" id="submit4" ng-disabled="myform4.$invalid" ng-click="submit4(panx)" value="Submit" class="btn btn-primary btn-lg btn-block login-button"></input>
+							</div>
+							</div>			
+ 		</form> 
+ 	</div> 
+ </section> 
+</div> 
+
+<div class="unsuccessfulresult">
+<table class="table table-bordered" style="border:3px dashed black;">
+<thead>
+
+<tr style="border:3px dashed black;">
+	<th style="border:3px dashed black;"><center>RECIPIENT'S CARD NUMBER</center></th>
+	<th style="border:3px dashed black;"><center>TRANSACTION AMOUNT</center></th>
+	<th style="border:3px dashed black;"><center>TIMESTAMP</center></th>
+	<th style="border:3px dashed black;"><center>REASON</center></th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="cardhold in panp">
+                <td align="center" style=" border:3px dashed black;">{{cardhold.values[0]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{cardhold.values[1]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{cardhold.values[2]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{cardhold.values[3]}}</td>
+</tr>
+</tbody>
+</table>
+</div> 
+<div class="merchlog">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform5" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+ 				<label for="merchid" class="cols-sm-2 control-label">Merchant ID</label>
+ 					<div class="cols-sm-10">
+ 						<div class="input-group">
+ 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+ 							<input type="text" class="form-control" name="merchidx" id="merchidx" ng-model="merchidx" ng-change="showmerchdata(merchidx)" placeholder="Enter the merchant id" required="required" minlength="8" maxlength="8" ng-pattern="/^[0-9]*$/"></input>
+ 						</div>
+							<span ng-show="myform5.merchidx.$error.required">*Mandatory field</span>  
+							<span ng-show="myform5.merchidx.$error.minlength">&nbsp;&nbsp;*Merchant ID should be 8 digits</span>  
+					</div>				
+			</div>	
+			<div class="form-group ">
+			<div class="merchlogresultlink">
+				<input type="submit" id="submit5" value="Submit" ng-disabled="myform5.$invalid" ng-click="submit5(merchidx)" class="btn btn-primary btn-lg btn-block login-button"></input>
+			</div>
+			</div>						
+ 		</form> 
+ 	</div> 
+ </section> 
+</div>
+<div class="merchlogresult">
+<table class="table table-bordered" style="border:3px dashed black;">
+<thead>
+
+<tr style="border:3px dashed black;">
+	<th style="border:3px dashed black;"><center>CARD NUMBER</center></th>
+	<th style="border:3px dashed black;"><center>TRANSACTION AMOUNT</center></th>
+	<th style="border:3px dashed black;"><center>AMOUNT PAID BY CARD</center></th>
+	<th style="border:3px dashed black;"><center>WALLET VALUE GIVEN</center></th>
+	<th style="border:3px dashed black;"><center>TIMESTAMP</center></th>
+	<th style="border:3px dashed black;"><center>STATUS</center></th>
+	<th style="border:3px dashed black;"><center>REMARKS</center></th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="merchants in merchx">
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[0]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[1]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[2]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[3]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[4]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[5]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{merchants.values[6]}}</td>
+</tr>
+</tbody>
+</table>
+</div> 
+<div class="cardlog">
+ <section> 
+ 	<div class="main-login main-center" style="background-color:yellow"> 
+ 		<form class="form-horizontal" name="myform6" novalidation="novalidation" method="post"> 
+ 			<div class="form-group">
+								<label for="ypan" class="cols-sm-2 control-label">Card Number</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+										<input type="text" class="form-control" name="panidx" id="panidx" ng-model="panidx" placeholder="Enter your card number" required="required" minlength="16" maxlength="16" ng-pattern="/^[0-9]*$/"></input>
+									</div>
+								    <span ng-show="myform6.panidx.$error.required">*Mandatory field</span>  
+									<span ng-show="myform6.panidx.$error.minlength">&nbsp;&nbsp;*Card number should be 16 digits</span>  
+									<span ng-show="myform6.panidx.$error.pattern">&nbsp;&nbsp;*Card number should be numeric</span>  	
+								</div>
+							</div>
+							<div class="form-group ">
+							<div class="cardlogresultlink">
+								<input type="submit" id="submit6" ng-disabled="myform6.$invalid" ng-click="submit6(panidx)" value="Submit" class="btn btn-primary btn-lg btn-block login-button"></input>
+							</div>
+							</div>			
+ 		</form> 
+ 	</div> 
+ </section> 
+</div> 
+
+<div class="cardlogresult">
+<table class="table table-bordered" style="border:3px dashed black;">
+<thead>
+
+<tr style="border:3px dashed black;">
+	<th style="border:3px dashed black;"><center>TIMESTAMP</center></th>
+	<th style="border:3px dashed black;"><center>ACTIVITY DESCRIPTION</center></th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="card in pandx">
+                <td align="center" style=" border:3px dashed black;">{{card.values[0]}}</td>
+                <td align="center" style=" border:3px dashed black;">{{card.values[1]}}</td>
+</tr>
+</tbody>
+</table>
+</div> 
+</div>
+<div id="footer"> 
+ <footer class="Mainfooter"> 
+ <div class="row"> 
+ <div class="col-md-12 footerDiv"> 
+ <p> 
+ <a href=" ">FAQ</a> 
+ <a href=" ">Contact Us</a> 
+ <a href=" ">Terms and Conditions</a> 
+ <a href=" ">Privacy</a> 
+ <!--<img src="../images/" alt="Discover_image" />--> 
+ </p> 
+ <p class="disclaimer">@2017 Discover Bank</p> 
+ </div> 
+ </div> 
+ </footer> 
+ </div> 
+ <script type="text/javascript" src="/js/bootstrap.js"></script> 
+ </div>
+ </body>
+ </html> 

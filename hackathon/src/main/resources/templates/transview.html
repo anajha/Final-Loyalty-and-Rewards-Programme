@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Discover Financial Services </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+ <style> 
+</style>
+</head>
+<br/>
+
+<form method="post" enctype="multipart/form-data">    
+<div class="container">
+<br/><br/>     
+  <table class="table table-bordered" style="border:3px dashed black;">
+<thead>
+
+<tr style="border:3px dashed black;">
+	<th style="border:3px dashed black;"><center>Sr.no</center></th>
+	<th style="border:3px dashed black;"><center>ID</center></th>
+	<th style="border:3px dashed black;"><center>PAN</center></th>
+	<th style="border:3px dashed black;"><center>POINTS</center></th>
+	<th style="border:3px dashed black;"><center>REWARD VALUE IN DOLLARS</center></th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="tran,iterationStatus : ${transaction}">
+	<td th:text="${iterationStatus.count}" align="center" style=" border:3px dashed black;">1</td>
+	<td th:text="${tran.id}" align="center" style="border:3px dashed black;" >NA</td>
+	<td th:text="${tran.pan}" align="center" style="border:3px dashed black;">NA</td>
+	<td><input type="date" name="bday"></input></td>
+	<td th:text="${tran.value}" align="center" style="border:3px dashed black;">NA</td>				
+</tr>
+
+</tbody>
+</table>
+</div>
+  </form>
+</html>

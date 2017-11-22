@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+    <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css"></link>
+
+		<!-- Website CSS style -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css"></link>
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
+		
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'></link>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'></link>
+		<title>Universal Rewards</title>
+	<script src="/js/angular.min.js"></script>
+		<script type="text/javascript">
+		var app = angular.module('myapp',[]);
+		app.controller('ExampleController', function($scope,$http,$window) {
+		 	
+			$scope.submit = function (pan,merchid,billamt1,amtpaid) {
+			if ($window.confirm("Do you want to continue?"))
+			{		
+	 		$http({
+	 	          method: 'POST',
+	 	          url: '/demo/transactionview',
+	 	          params: {pan:pan,merchid:merchid,billamt1:billamt1,amtpaid:amtpaid},
+	 	          headers: 'Accept:application/json'
+	 	        }).then(function(response) {
+	 	        	console.log(response.data);
+	 	        	$window.alert(response.data.message);
+	 	        });
+	 	}
+	 	}
+	 	
+	 	$scope.showpoints = function (pan) {
+	 		$http({
+	 	          method: 'POST',
+	 	          url: '/demo/cardcheck',
+	 	          params: {ypan:pan},
+	 	          headers: 'Accept:application/json'
+	 	        }).then(function(response) {
+	 	        	console.log(response.data);
+	 	        	$window.alert(response.data.message);
+	 	        });
+	         
+	 	}
+	 	
+	 	$scope.showmerch = function (merchid) {
+	 		$http({
+	 	          method: 'POST',
+	 	          url: '/demo/merchcheck',
+	 	          params: {merchid:merchid},
+	 	          headers: 'Accept:application/json'
+	 	        }).then(function(response) {
+	 	        	console.log(response.data);
+	 	        	$window.alert(response.data.message);
+	 	        });
+	         
+	 	}
+	 	
+});
+		</script>
+			<style>
+			span{
+				color:red;
+				}
+				ul{ 
+ 					list-style-type:none; 
+ 					margin:0; 
+ 					padding:0; 
+ 					overflow:hidden; 
+ 					background-color:lightblue; 
+ 					} 
+			li{
+				float:left;
+				}
+			li a{ 
+ 					display:block; 
+ 					color:white; 
+ 					text-align:left; 
+				 	padding:10px 10px; 
+ 					font-size:10px; 
+ 	} 
+				
+			li a:hover{
+				background-color: grey;
+				}
+			.active{
+ 					background-color:#4CAF50;
+				} 	
+				.Mainfooter
+			{
+				background-color:#113154;
+				position:relative;
+				bottom:0;
+				width:100%;
+			}
+			.Mainfooter .row .footerDiv a
+			{
+				padding:0 10px;
+				color:black;
+				text-decoration:none;
+				color:white;
+			}
+			.Mainfooter .row .footerDiv p .desclaimer
+			{
+				color:white;
+				padding: 0 10px;
+				
+			}
+					
+		</style>	
+	</head>
+	<body ng-controller="ExampleController" style="height:135%;background-color:#ff9900">
+<header>
+<h1 style="background-color:grey">Transaction Screen</h1>
+</header>
+		<ul>
+					<li><a href="addpan.html">Add New Member</a></li>
+					<li><a href="addmerchant.html">Add/Update Merchant</a></li>
+					<li><a class="active" href="transactionview.html" target="_self">Perform Transaction</a></li>
+					<li><a href="transferview.html">Perform Transfer</a></li>
+					<li><a href="pointsview.html">View Points</a></li>
+					<li><a href="statsview.html">Statistics Corner</a></li>
+		</ul>
+
+<section>
+<div class="modal-body row">
+   <div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title"><strong>Purchase transaction</strong></h1>
+	               		<hr />
+	               	</div>
+	            </div> 
+				<div class="main-login main-center" style="background-color:yellow;">
+					<form class="form-horizontal" name="myform" novalidation="novalidation" method="post">
+						<div class="form-group">
+							<label for="pan" class="cols-sm-2 control-label">Card number</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>								
+								<input type="text" class="form-control" name="pan" id="pan" ng-model="pan" ng-change="showpoints(pan)" placeholder="Enter your card number" required="required" minlength="16" maxlength="16" ngMin="1000000000000000" ngMax="9999999999999999" ng-pattern="/^[0-9]*$/"></input>
+								</div>
+								    <span ng-show="myform.pan.$error.required">*Mandatory field</span>  
+									<span ng-show="myform.pan.$error.minlength">&nbsp;&nbsp;*Card number should be 16 digits</span>  
+									<span ng-show="myform.pan.$error.pattern">&nbsp;&nbsp;*Card number should be numeric</span>  	
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="merchid" class="cols-sm-2 control-label">Merchant ID</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="merchid" id="merchid" ng-model="merchid" ng-change="showmerch(merchid)" placeholder="Enter your Merchant ID" required="required" minlength="8" maxlength="8" ngMin="10000000" ngMax="99999999" ng-pattern="/^[0-9]*$/"></input>
+								</div>
+									<span ng-show="myform.merchid.$error.required">*Mandatory field</span>  
+									<span ng-show="myform.merchid.$error.minlength">&nbsp;&nbsp;*Merchant ID must be 8 digits</span>  
+									<span ng-show="myform.merchid.$error.pattern">&nbsp;&nbsp;*Merchant ID should be numeric</span>  
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="billamt" class="cols-sm-2 control-label">Bill Amount</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="number" class="form-control" name="billamt" id="billamt" ng-model="billamt1"  placeholder="Enter Bill Amount" required="required" ngMin="1"></input>
+								</div>
+								<span ng-show="myform.billamt.$error.required">*Mandatory field</span>  
+									<span ng-show="myform.billamt.$error.min">&nbsp;&nbsp;*Enter a non-decimal value greater than 0</span>  
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="amtpaid" class="cols-sm-2 control-label">Amount paid by Card</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="number" class="form-control" name="amtpaid" id="amtpaid"  ng-model="amtpaid" placeholder="Enter amount to be paid by cash" required="required" ngMin="1"></input>
+								</div>
+								<span ng-show="myform.amtpaid.$error.required">*Mandatory field</span>  
+								<span ng-show="myform.amtpaid.$error.min">&nbsp;&nbsp;*Enter a non-decimal value greater than 0</span>  
+							</div>
+						</div>
+                                               
+                           <div class="form-group ">
+							<input type="submit" id="submit" value="Submit" ng-disabled="myform.$invalid" ng-click="submit(pan,merchid,billamt1,amtpaid)" class="btn btn-primary btn-lg btn-block login-button"></input>
+						 <center><a href="/images/Transaction.png">Design</a></center></div>
+					</form>
+			</div>
+		</div> 
+         </div> 
+            
+         </div>
+        
+</section>
+                <footer class="Mainfooter">
+			<div class="row">
+				<div class="col-md-12 footerDiv">
+				<p>
+					<a href=" ">FAQ</a>
+					<a href=" ">Contact Us</a>
+					<a href=" ">Terms and Conditions</a>
+					<a href=" ">Privacy</a>
+					<!--<img src="../images/" alt="Discover_image" />-->
+				</p>
+				<p class="disclaimer">@2017 Discover Bank</p>
+				</div>
+				
+			</div>
+		</footer>
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+	</body>
+</html>

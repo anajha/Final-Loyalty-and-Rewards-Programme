@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+
+		<!-- Website CSS style -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="/css/min.css">
+		
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+		<title>Login</title>
+
+	<script src="/js/angular.min.js"></script>
+		<script>
+			angular.module("myapp",[]);
+		</script>
+			</head>
+	<body ng-app="myapp">
+<header>
+<h1>Login</h1>
+</header>
+<section>
+   <div class="container">
+			<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title"><strong>LOGIN PAGE</strong></h1>
+	               		<hr />
+	               	</div>
+	            </div> 
+				<div class="main-login main-center">
+					<form class="form-horizontal" method="post" action="#" name="myform">
+						
+						<div class="form-group">
+							<label for="name" class="cols-sm-2 control-label">User ID</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="user" id="user" ng-model="user"  placeholder="Enter your user id"  required/>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  ng-model="password" placeholder="Enter your Password" minlength="8" maxlength="15" required="required"/>
+								</div>
+							</div>
+						</div>
+                                        
+                        <div class="form-group ">
+							<input type="submit" ng-disabled="myform.$invalid" value="LOGIN" class="btn btn-primary btn-lg btn-block login-button"/>
+						</div>
+						
+						<a href="register.html">Register Here</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="resetpass.html">Reset Password</a>&nbsp;&nbsp;&nbsp;
+						<a href="forgetpass.html">Forget Password</a>
+						
+					</form>
+			</div>
+		</div> 
+         </div> 
+</section>
+ 
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+	</body>
+</html>  
